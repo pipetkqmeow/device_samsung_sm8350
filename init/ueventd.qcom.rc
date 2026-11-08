@@ -188,13 +188,8 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/ /
 /dev/hidraw*                        0660  root    usb
 
 # wlan
-/dev/wcnss_wlan           0660   system     system
-/dev/wcnss_ctrl           0660   system     system
-/sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
-/sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
 /sys/devices/platform/soc/*.qcom,icnss/net/wlan*/queues/rx-* rps_cpus             0660   system     system
 /sys/devices/platform/soc/1c00000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan*/queues/rx-* rps_cpus      0660   system     system
-/sys/devices/platform/soc/17a10040.qcom,wcn6750/net/wlan*/queues/rx-* rps_cpus    0660   system     system
 /dev/spidev0.0            0660   system     audio
 /dev/i2c-7                0660   system     audio
 /dev/msm_camera/*         0660   system     camera
@@ -311,8 +306,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/ /
 /dev/battery_data         0660   system     system
 
 # wlan
-/dev/wcnss_wlan           0660   system     system
-/dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0/queues/rx-* rps_cpus 0660 system system
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/p2p0/queues/rx-* rps_cpus 0660 system system
 
@@ -480,7 +473,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/ /
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   scan_elements/in_anglvel_z_index 0664    system  system
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   scan_elements/in_anglvel_z_type  0664    system  system
 
-
 # standard iio temp attributes
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   in_temp_offset                  0664    system  system
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   in_temp_raw                     0664    system  system
@@ -527,7 +519,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/ /
 /sys/class/camera/rear    rear_tofcal_uid           0444    system    system
 /sys/class/camera/rear    rear_tof_dual_cal         0444    system    system
 /sys/class/camera/rear    rear_actuator_power       0440    system    system
-
 
 # Camera::Rear2
 /sys/class/camera/rear    rear2_camfw               0664    system    system
@@ -638,7 +629,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/ /
 /sys/class/camera/front    front_tofcal_size        0664    system    system
 /sys/class/camera/front    front_tofcal_uid         0664    system    system
 
-
 # Camera::Front End
 
 # Camera::Flash
@@ -670,7 +660,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/ /
 /sys/class/camera/ois    rear3_read_cross_talk          0444    system    system
 /sys/class/camera/ois    ois_ext_clk                    0664    system    system
 /sys/class/camera/ois    check_hall_cal                 0444    system    system
-
 
 # Camera::Ssm
 /sys/class/camera/ssm    ssm_frame_id                0664    system    system

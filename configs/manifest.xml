@@ -1,5 +1,4 @@
-<manifest version="2.0" type="device" target-level="5">
-    <hal format="hidl">
+<manifest version="2.0" type="device" target-level="5">    <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
         <fqname>@7.0::IDevicesFactory/default</fqname>
@@ -112,11 +111,6 @@
         <fqname>@1.1::ITrustedInput/qtee-vm</fqname>
         <fqname>@1.2::ITrustedUI/default</fqname>
         <fqname>@1.2::ITrustedUI/qtee-vm</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.wifi.wifilearner</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::IWifiStats/wifiStats</fqname>
     </hal>
     <hal format="hidl" override="true">
         <name>vendor.qti.power.pasrmanager</name>

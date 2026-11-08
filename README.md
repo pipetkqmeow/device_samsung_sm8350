@@ -127,28 +127,47 @@ The device is **non-A/B** with a download mode:
 
 This is a **starting point** tree, not a finished port. Expect to iterate:
 
-* **Sepolicy** — `sepolicy/` was inherited from sm7325-common. Boot with
-  `androidboot.selinux=permissive` (see commented line in `BoardConfig.mk`)
-  and fix denials vendor-side.
-* **NFC** — the vendor HAL is the NXP HIDL blob; the framework NFC app on
-  Android 16 expects AIDL. Ships as blobs + `libnfc-nxp.conf`; may need an
-  AIDL wrapper (see `hardware/samsung_slsi/nfc` for how Samsung does it) or
-  the AOSP NXP stack.
+* **Sepolicy** — `sepolicy/` inherited from sm7325-common, with
+  device-specific rules added for o1q: QBT2000 ultrasonic fingerprint
+  (`vendor_qbt_device`), Broadcom dhd sysfs (`/sys/wifi` → `sysfs_wifi`,
+  `/sys/module/dhd` → `sysfs_ss_writable`, labels match the stock vendor
+  policy), `vendor.samsung.hardware.wifi::ISehWifi` hwservice context and
+  `ro.vendor.wifi.*` property contexts. The tree builds with SELinux
+  **enforcing**; if boot fails during bring-up, uncomment the
+  `androidboot.selinux=permissive` line in `BoardConfig.mk`, collect
+  denials and fix them vendor-side.
+* **NFC** — the vendor HAL is the NXP HIDL blob (shipped with its rc +
+  VINTF manifest + `libnfc-nxp.conf`); the framework NFC app on
+  Android 16 expects AIDL, so an AIDL bridge may be needed (see
+  `hardware/samsung_slsi/nfc` for how Samsung does it).
 * **Camera** — full Samsung unihal blob set (camera.qcom.so +
-  camera.unihal.default.so + per-sensor bins for imx555/imx563/imx374/
-  s5kgw2) is included. The `com.samsung.android.camera.unihal` APEX is not
-  packaged; camera HAL bring-up usually needs extra work (provider 2.6 +
-  Samsung extensions in `hardware/samsung`).
-* **Face unlock** — vendor face HAL blobs (`vendor.samsung.hardware.biometrics.face@2.0/3.0`)
-  are extracted; an AIDL bridge is not wired up yet.
-* **Wi-Fi** — Broadcom dhd: firmware + nvram are extracted; the vendor
-  `android.hardware.wifi@1.0-service` is used. `macloader` runs from
-  `wifi_sec.rc`; if HIDL Wi-Fi HAL is rejected by the framework, build
-  `android.hardware.wifi@1.0-default-service` from `hardware/interfaces`
-  with `libwifi-hal` for bcmdhd instead.
+  camera.unihal.default.so + unihal_*.so + per-sensor bins for
+  imx555/imx563/imx374/s5kgw2) is included. The
+  `com.samsung.android.camera.unihal` APEX is not packaged; camera HAL
+  bring-up usually needs extra work (provider 2.6 + Samsung extensions
+  in `hardware/samsung`).
+* **Face unlock** — vendor face HAL blobs
+  (`vendor.samsung.hardware.biometrics.face@2.0/3.0`) are extracted; an
+  AIDL bridge is not wired up yet.
+* **Wi-Fi** — Broadcom BCM4375 (dhd): firmware, nvram, CLDB blobs and the
+  vendor `android.hardware.wifi@1.0-service` HIDL HAL (+ Samsung
+  `vendor.samsung.hardware.wifi@2.0-service` extension) are shipped from
+  the stock vendor. `macloader`/`mfgloader` run from `wifi_sec.rc`;
+  backlight... Wi-Fi firmware is loaded by the HAL itself via
+  `/sys/module/dhd/parameters/`. If the HIDL HAL is ever rejected by the
+  framework, build `android.hardware.wifi@1.0-default-service` from
+  `hardware/interfaces` with libwifi-hal for bcmdhd instead.
+* **Lights** — no light HAL is shipped (screen brightness is handled by
+  the AIDL display composer `setDisplayBrightness`), same as the
+  sm8350/sm7325 LineageOS trees. The stock
+  `vendor.samsung.hardware.light-service` AIDL blob is a known fallback.
 * **Power** — `powerhint.json` ships with SD888 CPU tables
   (little 1.8 GHz / mid 2.42 GHz / prime 2.84 GHz, Adreno 660 @ 840 MHz)
   taken from the device sysfs.
+* **Fingerprint** — ultrasonic UDFPS: QBT2000 blobs + `vendor_qbt_device`
+  sepolicy + `ro.vendor.fingerprint.type=udfps` /
+  `sensor_location=540|2137|120` (verify against your panel and adjust in
+  `vendor.prop` if the indicator is off).
 * **Sensors** — multihal 2.0 with vendor subhals
   (`sensors.ssc.so`, `sensors.grip.so`, `sensors.flicker.so`) + lahaina
   registry JSONs from the device.

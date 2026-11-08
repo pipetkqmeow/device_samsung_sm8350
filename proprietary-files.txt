@@ -944,7 +944,7 @@ vendor/firmware/ipa_fws.mdt
 
 vendor/bin/hw/nxp.android.hardware.nfc@1.2-service
 vendor/etc/init/nxp.android.hardware.nfc@1.2-service.rc
--vendor/etc/vintf/manifest/nxp.android.hardware.nfc@1.2-service.xml
+vendor/etc/vintf/manifest/nxp.android.hardware.nfc@1.2-service.xml
 vendor/lib64/nfc_nci_nxpsn.so
 vendor/lib64/vendor.samsung.hardware.nfc@2.0.so
 # Sensors
@@ -1052,14 +1052,12 @@ vendor/firmware/vpu20_4v.mdt
 
 vendor/bin/hw/android.hardware.wifi@1.0-service
 vendor/etc/init/android.hardware.wifi@1.0-service.rc
--vendor/etc/vintf/manifest/android.hardware.wifi@1.0-service.xml
+vendor/etc/vintf/manifest/android.hardware.wifi@1.0-service.xml
 vendor/bin/hw/vendor.samsung.hardware.wifi@2.0-service
 vendor/etc/init/vendor.samsung.hardware.wifi@2.0-service.rc
--vendor/etc/vintf/manifest/vendor.samsung.hardware.wifi@2.0-service.xml
+vendor/etc/vintf/manifest/vendor.samsung.hardware.wifi@2.0-service.xml
 vendor/lib64/vendor.samsung.hardware.wifi@2.0.so
 vendor/bin/hw/mfgloader
-vendor/bin/wifilearner
-vendor/etc/init/vendor.qti.hardware.wifi.wifilearner@1.0-service.rc
 vendor/firmware/bcmdhd_clm.blob
 vendor/firmware/bcmdhd_mfg.bin_b1
 vendor/firmware/bcmdhd_mon.bin_b1

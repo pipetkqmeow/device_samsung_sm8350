@@ -42,7 +42,7 @@ TARGET_KERNEL_SOURCE := kernel/samsung/o1q
 TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig
 
 # Kernel flags
-BOARD_KERNEL_CMDLINE += console=null boot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat printk.devkmsg=on cpuinfo.chipname=SM8350 panic=4
+BOARD_KERNEL_CMDLINE += console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat printk.devkmsg=on cpuinfo.chipname=SM8350 panic=4
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_BOOT_HEADER_VERSION := 3
 
@@ -81,7 +81,6 @@ TARGET_USERIMAGES_USE_EXT4           := true
 # Partition sizes, obtained with blockdev --getsize64
 BOARD_DTBOIMG_PARTITION_SIZE                    := 25165824
 BOARD_BOOTIMAGE_PARTITION_SIZE                  := 100663296
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE           := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE              := 81788928
 BOARD_CACHEIMAGE_PARTITION_SIZE                 := 629145600
 BOARD_SUPER_PARTITION_SIZE                      := 12574523392
@@ -175,7 +174,6 @@ WIFI_DRIVER_NVRAM_PATH := "/vendor/firmware/nvram.txt_CS01_semco_b1"
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-
 # Display
 TARGET_SCREEN_DENSITY := 420
 

@@ -33,7 +33,3 @@ on early-init
 on post-fs
 # Create carrier folder for HiddenMenu
     mkdir /efs/carrier 0755 radio system
-
-on post-fs-data
-# MST/NFC Switch
-    chmod 0660 /dev/mst_ctrl

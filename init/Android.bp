@@ -24,13 +24,6 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "init.nfc.samsung.rc",
-    src: "init.nfc.samsung.rc",
-    sub_dir: "init",
-    soc_specific: true,
-}
-
-prebuilt_etc {
     name: "init.o1q.rc",
     src: "init.o1q.rc",
     sub_dir: "init/hw",

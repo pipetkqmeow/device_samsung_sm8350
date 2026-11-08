@@ -8,7 +8,6 @@ genfscon sysfs /class/input                                                     
 genfscon sysfs /class/sec/tsp                                                                               u:object_r:sysfs_sec_touchscreen:s0
 genfscon sysfs /class/sensor_event                                                                          u:object_r:sysfs_sensors:s0
 genfscon sysfs /class/fingerprint/fingerprint                                                               u:object_r:sysfs_fingerprint:s0
-genfscon sysfs /kernel/boot_wlan/                                                                           u:object_r:sysfs_wifi_writable:s0
 
 genfscon sysfs /devices/virtual/tas25xx/                                                                    u:object_r:sysfs_audio_writable:s0
 genfscon sysfs /class/cirrus/                                                                               u:object_r:sysfs_audio_writable:s0
@@ -96,10 +95,8 @@ genfscon sysfs /kernel/mm/vmscan/mem_boost_mode                                 
 genfscon sysfs /devices/virtual/sec/sec-ap-thermistor/                                                      u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/virtual/sec/sec-pa-thermistor/                                                      u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/virtual/sec/sec-wf-thermistor/                                                      u:object_r:sysfs_thermal:s0
-genfscon sysfs /devices/platform/soc/17a10040.qcom,wcn6750/                                                 u:object_r:sysfs_wifi_writable:s0
 
 genfscon sysfs /power/                                                                                      u:object_r:sysfs_power_writable:s0
 
 genfscon sysfs /wifi                                                                                        u:object_r:sysfs_wifi:s0
-genfscon sysfs /wifi/mac_addr                                                                               u:object_r:sysfs_wifi_writable:s0
-genfscon sysfs /wifi/memdump                                                                                u:object_r:sysfs_wifi_writable:s0
+genfscon sysfs /module/dhd                                                                                  u:object_r:sysfs_ss_writable:s0

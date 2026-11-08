@@ -37,7 +37,6 @@ PRODUCT_PACKAGES += \
     fstab.ramplus \
     init.audio.samsung.rc \
     init.fingerprint.rc \
-    init.nfc.samsung.rc \
     init.o1q.rc \
     init.qcom.rc \
     init.qcom.recovery.rc \
@@ -73,8 +72,8 @@ PRODUCT_PACKAGES += \
     init.qti.qcv.sh
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom \
-    $(LOCAL_PATH)/init/fstab.qcom:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.qcom
+    $(LOCAL_PATH)/init/fstab.qcom:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.qcom \
+    $(LOCAL_PATH)/init/fstab.qcom:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.default
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -115,7 +114,6 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider-service.samsung
 
 $(call soong_config_set_bool,samsungCameraVars,needs_sec_reserved_field,true)
-$(call soong_config_set,samsungCameraVars,extra_ids,54) # ID=54 is macro
 
 # CAS
 PRODUCT_PACKAGES += \
@@ -199,10 +197,6 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-service.samsung
 
 $(call soong_config_set,samsungVars,target_keymaster4_library,//vendor/samsung/o1q:libskeymaster4device)
-
-# Lights
-PRODUCT_PACKAGES += \
-    android.hardware.light-service.samsung
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
