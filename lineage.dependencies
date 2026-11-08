@@ -1,0 +1,10 @@
+[
+  {
+        "repository": "android_kernel_samsung_o1q",
+        "target_path": "kernel/samsung/o1q"
+  },
+  {
+        "repository": "android_hardware_samsung",
+        "target_path": "hardware/samsung"
+  }
+]
