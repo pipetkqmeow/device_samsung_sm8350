@@ -140,10 +140,14 @@ This is a **starting point** tree, not a finished port. Expect to iterate:
   **enforcing**; if boot fails during bring-up, uncomment the
   `androidboot.selinux=permissive` line in `BoardConfig.mk`, collect
   denials and fix them vendor-side.
-* **NFC** — the vendor HAL is the NXP HIDL blob (shipped with its rc +
-  VINTF manifest + `libnfc-nxp.conf`); the framework NFC app on
-  Android 16 expects AIDL, so an AIDL bridge may be needed (see
-  `hardware/samsung_slsi/nfc` for how Samsung does it).
+* **NFC** — works with the stock NXP HIDL 1.2 HAL blob as-is: the
+  LineageOS 23.2 NFC stack (`packages/modules/Nfc`) talks to HIDL
+  `android.hardware.nfc INfc` directly through its Rust HIDL FFI
+  (verified in `libnfc-nci/src/rust/hal/ffi/hidl.cc`), and the stock
+  service registers the standard `android.hardware.nfc@1.0::INfc
+  default` interface (up to 1.2). Shipped: the service blob + its rc +
+  VINTF manifest + `libnfc-nxp.conf` / `libnfc-nxp_RF.conf` +
+  `libsn100u_fw.so` firmware. No AIDL bridge needed.
 * **Camera** — full Samsung unihal blob set (camera.qcom.so +
   camera.unihal.default.so + unihal_*.so + per-sensor bins for
   imx555/imx563/imx374/s5kgw2) is included. The
