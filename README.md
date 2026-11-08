@@ -66,29 +66,33 @@ git clone <your-fork> device/samsung/o1q
 The kernel is expected at `kernel/samsung/o1q` (see `BoardConfig.mk`:
 `TARGET_KERNEL_SOURCE` / `TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig`).
 
-Your Samsung OSS kernel drop (5.4.274-qgki, the `G9910-S21-5g` tree that
-already builds your APatch kernels) can be used directly:
+Use the working kernel from this machine (physwizz `G9910-S21-5g` tree,
+branch `lineage-23.2` — it already carries the `techpack/datarmnet`
+import needed for mobile data):
 
 ```bash
-cp -a /path/to/G9910-S21-5g kernel/samsung/o1q
-cd kernel/samsung/o1q && git init && git add -A && git commit -m "Initial import"
+git clone --branch lineage-23.2 /path/to/G9910-S21-5g \
+    kernel/samsung/o1q
 ```
 
 Notes:
 
-* The defconfig is `arch/arm64/configs/vendor/o1q_chn_openx_defconfig`
-  (used by your `build_kernel.sh`). If you keep your APatch/KernelSU
-  additions enabled, disable them for the Lineage build
-  (`CONFIG_KSU`, APatch KPM, hid-aksys debug hooks, etc. are not needed
-  and may break SELinux/verity boot).
-* The 5.4 qgki kernel builds with the ROM toolchain, but if clang errors
-  appear, compare with `LineageOS/android_kernel_samsung_sm7325`
-  (same qgki base) — it carries the clang-17+ fixes and
-  `lineage-a52sxq_defconfig` as a reference for Lineage-specific options
-  (e.g. `CONFIG_ANDROID_BINDER_IPC_SELFTEST` is NOT needed, but
-  `CONFIG_OVERLAY_FS`, `CONFIG_SDFAT`/exfat, USB gadget configfs matter).
-* Qualcomm techpack modules (`modules.load` list) are built from this
-  kernel; `BOARD_VENDOR_KERNEL_MODULES_LOAD` picks them up automatically.
+* `TARGET_KERNEL_ADDITIONAL_FLAGS := CONFIG_BUILD_ARM64_DT_OVERLAY=y`
+  mirrors the environment of your `build_kernel.sh`, so the Samsung
+  palette DTBO overlays (`o1q_chn_openx_w00_r05..r14`) are built.
+* `dtbo.img` is packed in the exact stock palette order by the custom
+  `dtboimg.mk` (verified byte-identical against the live dtbo partition;
+  the bootloader matches overlays by `qcom,board-id`/`dtbo-hw_rev`, and
+  this unit uses r14 at `dtbo_idx=3`).
+* `TARGET_DTB_LIST_WILDCARD := vendor/qcom/lahaina*` keeps the kitchen-sink
+  qgki defconfig's hisilicon DTBs out of `dtb.img` (recovery image).
+* The `techpack/datarmnet` import provides `rmnet_core/ctl/offload/shs`
+  required by the stock `modules.load` (mobile data path).
+* Keep your APatch/KernelSU defconfigs (`o1q_apatch*`) untouched — the
+  ROM build uses `o1q_chn_openx_defconfig`, which is clean of them.
+* If clang from the LOS 23.2 toolchain rejects this 5.4 tree, compare
+  with `LineageOS/android_kernel_samsung_sm7325` (same qgki base) which
+  carries the newer-clang fixes.
 
 ### 3. Extract proprietary blobs
 

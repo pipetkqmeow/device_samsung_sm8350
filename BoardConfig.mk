@@ -41,6 +41,13 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := kryo385
 TARGET_KERNEL_SOURCE := kernel/samsung/o1q
 TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig
 
+# Match the vendor build_kernel.sh environment (Samsung palette overlays)
+TARGET_KERNEL_ADDITIONAL_FLAGS := CONFIG_BUILD_ARM64_DT_OVERLAY=y
+
+# Only the Qualcomm base DTBs (kitchen-sink qgki defconfig also builds
+# hisilicon & friends which must not end up in dtb.img)
+TARGET_DTB_LIST_WILDCARD := vendor/qcom/lahaina*
+
 # Kernel flags
 BOARD_KERNEL_CMDLINE += console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat printk.devkmsg=on cpuinfo.chipname=SM8350 panic=4
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
@@ -153,6 +160,9 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/fstab.qcom
 # Releasetools
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_samsung_o1q
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
+
+# dtbo.img with the exact stock palette order (see dtboimg.mk)
+BOARD_CUSTOM_DTBOIMG_MK := $(DEVICE_PATH)/dtboimg.mk
 
 # SePolicy
 include device/lineage/sepolicy/libperfmgr/sepolicy.mk
