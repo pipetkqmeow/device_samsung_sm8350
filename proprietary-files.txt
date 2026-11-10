@@ -1076,6 +1076,12 @@ vendor/bin/hw/vendor.samsung.hardware.wifi@2.0-service
 vendor/etc/init/vendor.samsung.hardware.wifi@2.0-service.rc
 vendor/etc/vintf/manifest/vendor.samsung.hardware.wifi@2.0-service.xml
 vendor/lib64/vendor.samsung.hardware.wifi@2.0.so
+vendor/lib64/vendor.samsung.hardware.wifi@2.1.so
+vendor/lib64/vendor.samsung.hardware.wifi@2.2.so
+vendor/lib64/vendor.samsung.hardware.wifi@2.3.so
+vendor/lib64/vendor.samsung.hardware.wifi.hostapd@3.0.so
+vendor/lib64/vendor.samsung.hardware.wifi.supplicant@3.0.so
+vendor/lib64/vendor.samsung.hardware.wifi.supplicant@3.1.so
 vendor/bin/hw/mfgloader
 vendor/firmware/bcmdhd_clm.blob
 vendor/firmware/bcmdhd_mfg.bin_b1
