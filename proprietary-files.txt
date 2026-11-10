@@ -1013,3 +1013,5 @@ vendor/lib/libtriplecam_video_optical_zoom.so
 vendor/lib/libtswrappercommon.so
 vendor/lib64/libVendorSemDataProps.so
 vendor/lib64/libVendorSemTelephonyProps.so
+vendor/lib64/libtriplecam_optical_zoom_control.so
+vendor/lib/libtriplecam_optical_zoom_control.so
