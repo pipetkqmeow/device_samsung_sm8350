@@ -56,7 +56,7 @@ vendor/lib64/libaudioconfigstore.so
 vendor/lib/libsamsungVoipResampler.so
 vendor/lib/lib_soundaliveresampler.so
 vendor/lib/lib_SoundAlive_SRC384_ver320.so
-vendor/lib/librecordalive.so
+vendor/lib/librecordalive.so;DISABLE_DEPS
 vendor/lib/libexthwplugin.so
 vendor/lib/libsndmonitor.so
 vendor/lib/libbatterylistener.so
@@ -936,7 +936,8 @@ vendor/firmware/y792_o1.bin
 # Fingerprint
 
 vendor/lib64/hw/fingerprint.default.so
-vendor/lib64/libbauthserver.so
+vendor/lib64/libbauthserver.so;DISABLE_DEPS
+vendor/lib64/libgf_in_system_lib.so
 vendor/lib64/libbauthtzcommon.so
 vendor/lib64/libqfp_sensortest.so
 vendor/lib64/libsynaFpSensorTestNwd.so
