@@ -898,6 +898,10 @@ vendor/lib64/camera/components/com.samsung.node.uniplugin_capture.so
 vendor/lib64/camera/components/com.samsung.node.uniplugin_preview.so
 vendor/lib64/camera/components/com.samsung.node.uniplugin_recording.so
 vendor/lib64/camera/components/com.samsung.node.uniplugin_vdis.so
+# Samsung SemiStats camera dependencies
+vendor/lib64/libtswrappercommon.so
+vendor/lib/libsnap_vndk.so
+vendor/lib64/libsnap_vndk.so
 vendor/lib64/camera/components/com.ss.stats.aec.so
 vendor/lib64/camera/components/com.ss.stats.af.so
 vendor/lib64/camera/components/com.ss.stats.awb.so
