@@ -3,9 +3,13 @@ vendor.samsung.hardware.bluetooth::ISehBluetooth                                
 vendor.samsung.hardware.bluetooth.a2dp::ISehBluetoothAudioOffload                           u:object_r:hal_bluetooth_a2dp_hwservice:s0
 vendor.samsung.hardware.bluetooth.a2dpsink::ISehBluetoothA2dpSinkProvidersFactory           u:object_r:hal_bluetooth_a2dp_hwservice:s0
 vendor.samsung.hardware.bluetooth.audio::ISehBluetoothAudioProvidersFactory                 u:object_r:hal_audio_hwservice:s0
+vendor.samsung.hardware.bluetooth.audio@2.0::ISehBluetoothAudioProvidersFactory             u:object_r:hal_audio_hwservice:s0
 
 # GNSS
 vendor.samsung.hardware.gnss::ISehGnss                                                      u:object_r:hal_gnss_hwservice:s0
+
+# NFC (NXP SN100U HAL registers the Samsung NFC extension)
+vendor.samsung.hardware.nfc::ISehNfc                                                        u:object_r:hal_nfc_hwservice:s0
 
 # WiFi (Broadcom, vendor HIDL HAL)
 vendor.samsung.hardware.wifi::ISehWifi                                                      u:object_r:hal_wifi_hwservice:s0
