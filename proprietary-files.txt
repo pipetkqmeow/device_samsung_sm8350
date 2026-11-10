@@ -780,6 +780,8 @@ vendor/lib/libqsap_sdk.so
 vendor/lib64/libqsap_sdk.so
 # Audio
 
+vendor/lib64/libspeakercalibration.so
+vendor/lib/libspeakercalibration.so
 vendor/lib/hw/audio.primary.lahaina.so
 vendor/firmware/dax_param.bin
 # ACDB
