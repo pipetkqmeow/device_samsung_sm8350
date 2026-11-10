@@ -63,16 +63,15 @@ Put this tree in `device/samsung/o1q`:
 git clone <your-fork> device/samsung/o1q
 ```
 
-The kernel is expected at `kernel/samsung/o1q` (see `BoardConfig.mk`:
+The kernel lives at `kernel/samsung/o1q` (see `BoardConfig.mk`:
 `TARGET_KERNEL_SOURCE` / `TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig`).
 
-Use the working kernel from this machine (physwizz `G9910-S21-5g` tree,
-branch `lineage-23.2` — it already carries the `techpack/datarmnet`
-import needed for mobile data):
+It is pulled automatically via `lineage.dependencies` from
+`kernel_samsung_sm8350` (branch `lineage-23.2`). Manually:
 
 ```bash
-git clone --branch lineage-23.2 /path/to/G9910-S21-5g \
-    kernel/samsung/o1q
+git clone --branch lineage-23.2 \
+    git@github.com:pipetkqmeow/kernel_samsung_sm8350.git kernel/samsung/o1q
 ```
 
 Notes:
