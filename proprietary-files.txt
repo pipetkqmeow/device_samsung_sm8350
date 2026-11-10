@@ -783,6 +783,8 @@ vendor/etc/audconf/OPEN/Speaker_cal.acdb
 vendor/etc/audconf/OPEN/workspaceFile.qwsp
 # Bluetooth (Samsung extensions)
 
+vendor/lib64/libbluetooth_a2dpsink_session.so
+vendor/lib/libbluetooth_a2dpsink_session.so
 vendor/lib/hw/audio.a2dpsink.default.so
 vendor/lib64/hw/audio.a2dpsink.default.so
 vendor/lib/vendor.samsung.hardware.audio@1.0.so
