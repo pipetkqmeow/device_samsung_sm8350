@@ -482,6 +482,21 @@ vendor/lib64/libqti-iopd-client.so
 vendor/etc/init/ipa_fws.rc
 # Keymaster
 
+vendor/lib64/libhermes.so
+vendor/lib64/libhermes_bdbridge.so
+vendor/lib64/libkeymaster4.so
+vendor/lib64/libkeymaster4_1support.so
+vendor/lib64/libkeymaster4support.so
+vendor/lib64/libkeymaster_messages.so
+vendor/lib64/libkeymaster_portable.so
+vendor/lib64/libkeymasterdeviceutils.so
+vendor/lib64/libkeymasterutils.so
+vendor/lib64/libpuresoftkeymasterdevice.so
+vendor/lib64/libqtikeymaster4.so
+vendor/lib64/libsec_skpmHalTlc.so
+vendor/lib64/vendor.samsung.hardware.security.drk@2.0.so
+vendor/lib64/vendor.samsung.hardware.security.fkeymaster-V1-ndk_platform.so
+vendor/lib64/vendor.samsung.hardware.security.skpm@1.0.so
 vendor/lib64/libhermes_cred.so
 vendor/lib64/libkeymaster_helper.so
 -vendor/lib64/libskeymaster4device.so
