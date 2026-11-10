@@ -29,8 +29,23 @@ PRODUCT_TARGET_VNDK_VERSION := 30
 # No A/B
 AB_OTA_UPDATER := false
 
-# Kernel
+# Kernel (prebuilt)
 PRODUCT_ENABLE_UFFD_GC := false
+
+# Kernel modules (prebuilt, built with the same kernel as Image)
+PRODUCT_COPY_FILES += \
+    $(foreach module,$(wildcard $(LOCAL_PATH)/prebuilt/modules/*.ko),\
+        $(module):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $(module)))
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/modules/modules.load:$(TARGET_COPY_OUT_VENDOR)/lib/modules/modules.load \
+    $(LOCAL_PATH)/prebuilt/modules/modules.dep:$(TARGET_COPY_OUT_VENDOR)/lib/modules/modules.dep \
+    $(LOCAL_PATH)/prebuilt/modules/modules.alias:$(TARGET_COPY_OUT_VENDOR)/lib/modules/modules.alias \
+    $(LOCAL_PATH)/prebuilt/modules/modules.softdep:$(TARGET_COPY_OUT_VENDOR)/lib/modules/modules.softdep \
+    $(LOCAL_PATH)/prebuilt/modules/modules.blocklist:$(TARGET_COPY_OUT_VENDOR)/lib/modules/modules.blocklist
+
+# Touchscreen modules for recovery are copied from recovery/root/lib/modules
+# (build/make picks up $(TARGET_DEVICE_DIR)/recovery/root into the ramdisk)
 
 # Init files and fstab
 PRODUCT_PACKAGES += \

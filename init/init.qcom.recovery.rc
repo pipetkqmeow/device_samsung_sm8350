@@ -32,3 +32,13 @@ on init
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+on init
+# Touchscreen modules (from recovery ramdisk)
+    insmod /lib/modules/sec_tsp_log.ko
+    insmod /lib/modules/sec_tclm_v2.ko
+    insmod /lib/modules/sec_secure_touch.ko
+    insmod /lib/modules/sec_common_fn.ko
+    insmod /lib/modules/sec_tsp_dumpkey.ko
+    insmod /lib/modules/sec_cmd.ko
+    insmod /lib/modules/slsi_ts.ko

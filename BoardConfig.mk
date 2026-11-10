@@ -37,16 +37,14 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := kryo385
 
-# Kernel
+# Kernel (prebuilt, built with the Samsung clang-10 toolchain from the
+# kernel_samsung_sm8350 tree; the ROM build does not compile the kernel)
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel/Image
+TARGET_FORCE_PREBUILT_KERNEL := true
+
+# Kernel source kept wired for future source builds
 TARGET_KERNEL_SOURCE := kernel/samsung/o1q
 TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig
-
-# Match the vendor build_kernel.sh environment (Samsung palette overlays)
-TARGET_KERNEL_ADDITIONAL_FLAGS := CONFIG_BUILD_ARM64_DT_OVERLAY=y
-
-# Only the Qualcomm base DTBs (kitchen-sink qgki defconfig also builds
-# hisilicon & friends which must not end up in dtb.img)
-TARGET_DTB_LIST_WILDCARD := vendor/qcom/lahaina*
 
 # Kernel flags
 BOARD_KERNEL_CMDLINE += console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat printk.devkmsg=on cpuinfo.chipname=SM8350 panic=4
@@ -64,9 +62,8 @@ BOARD_CUSTOM_BOOTIMG := true
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Kernel modules
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
-BOARD_RECOVERY_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
-RECOVERY_KERNEL_MODULES := $(BOARD_RECOVERY_RAMDISK_KERNEL_MODULES_LOAD)
+# Kernel modules are shipped as prebuilts (see device.mk PRODUCT_COPY_FILES);
+# modules.load order is preserved from the stock vendor image.
 
 # Additional root folders
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
@@ -161,8 +158,13 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/fstab.qcom
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_samsung_o1q
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
 
-# dtbo.img with the exact stock palette order (see dtboimg.mk)
-BOARD_CUSTOM_DTBOIMG_MK := $(DEVICE_PATH)/dtboimg.mk
+# dtbo: prebuilt from the stock image (byte-verified: the five Samsung
+# palette overlays r05/r09/r12/r14/r07 in stock order, r14 at dtbo_idx=3)
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+BOARD_PREBUILT_RECOVERY_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+
+# Base DTBs for the recovery image (header v2 --dtb)
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtb
 
 # SePolicy
 include device/lineage/sepolicy/libperfmgr/sepolicy.mk

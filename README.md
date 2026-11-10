@@ -63,35 +63,46 @@ Put this tree in `device/samsung/o1q`:
 git clone <your-fork> device/samsung/o1q
 ```
 
-The kernel lives at `kernel/samsung/o1q` (see `BoardConfig.mk`:
-`TARGET_KERNEL_SOURCE` / `TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig`).
+The kernel is prebuilt: `TARGET_PREBUILT_KERNEL` +
+`TARGET_FORCE_PREBUILT_KERNEL` in `BoardConfig.mk` point at
+`prebuilt/kernel/Image`, so the ROM build never compiles the kernel
+(this is deliberate — the 5.4 qgki tree is built with the Samsung
+clang-10 toolchain it was validated with, avoiding new-clang fallout).
 
-It is pulled automatically via `lineage.dependencies` from
-`kernel_samsung_sm8350` (branch `lineage-23.2`). Manually:
+The prebuilts in `prebuilt/` are produced from the
+`kernel_samsung_sm8350` tree (branch `lineage-23.2`) with its
+`build_kernel.sh`:
 
 ```bash
 git clone --branch lineage-23.2 \
     git@github.com:pipetkqmeow/kernel_samsung_sm8350.git kernel/samsung/o1q
+cd kernel/samsung/o1q && bash build_kernel.sh
 ```
+
+Then stage into `device/samsung/o1q/prebuilt/`:
+
+* `kernel/Image` — from `out/arch/arm64/boot/Image`
+* `dtb/*.dtb` — `out/arch/arm64/boot/dts/vendor/qcom/lahaina*.dtb`
+  (base DTBs for the recovery image `--dtb`)
+* `dtbo.img` — trimmed stock dtbo image (2311827 bytes); the five
+  Samsung palette overlays are byte-identical between the kernel tree
+  and stock, r14 (this unit) at `dtbo_idx=3`
+* `modules/*.ko` + `modules.{load,dep,alias,softdep,blocklist}` —
+  the 91 stock `modules.load` modules (incl. datarmnet for mobile
+  data) plus depmod metadata generated on host
+* recovery touch modules live in `recovery/root/lib/modules/` and are
+  loaded by `init.qcom.recovery.rc` via `insmod`
 
 Notes:
 
-* `TARGET_KERNEL_ADDITIONAL_FLAGS := CONFIG_BUILD_ARM64_DT_OVERLAY=y`
-  mirrors the environment of your `build_kernel.sh`, so the Samsung
-  palette DTBO overlays (`o1q_chn_openx_w00_r05..r14`) are built.
-* `dtbo.img` is packed in the exact stock palette order by the custom
-  `dtboimg.mk` (verified byte-identical against the live dtbo partition;
-  the bootloader matches overlays by `qcom,board-id`/`dtbo-hw_rev`, and
-  this unit uses r14 at `dtbo_idx=3`).
-* `TARGET_DTB_LIST_WILDCARD := vendor/qcom/lahaina*` keeps the kitchen-sink
-  qgki defconfig's hisilicon DTBs out of `dtb.img` (recovery image).
-* The `techpack/datarmnet` import provides `rmnet_core/ctl/offload/shs`
-  required by the stock `modules.load` (mobile data path).
-* Keep your APatch/KernelSU defconfigs (`o1q_apatch*`) untouched — the
-  ROM build uses `o1q_chn_openx_defconfig`, which is clean of them.
-* If clang from the LOS 23.2 toolchain rejects this 5.4 tree, compare
-  with `LineageOS/android_kernel_samsung_sm7325` (same qgki base) which
-  carries the newer-clang fixes.
+* The kernel config is `o1q_chn_openx_defconfig` and is verified clean
+  of APatch/KernelSU additions; kernel release `5.4.274-physwizz+`.
+* `modules.dep` dependency chains are generated with depmod against
+  the matching `System.map`; all modules share one vermagic.
+* To switch to a source-built kernel later: drop
+  `TARGET_FORCE_PREBUILT_KERNEL`/`TARGET_PREBUILT_KERNEL` and re-add
+  `TARGET_KERNEL_ADDITIONAL_FLAGS := CONFIG_BUILD_ARM64_DT_OVERLAY=y`
+  plus the custom dtbo packing rule.
 
 ### 3. Extract proprietary blobs
 
