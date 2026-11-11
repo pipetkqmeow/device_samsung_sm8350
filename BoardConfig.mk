@@ -198,3 +198,6 @@ VENDOR_SECURITY_PATCH := 2026-01-01
 # UDFPS
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x2000U | 0x400000000LL
 SOONG_CONFIG_qtidisplay_udfps := true
+
+# Wi-Fi: pass the WLAN device selection to wpa_supplicant_8 soong config
+$(call soong_config_set,wpa_supplicant_8,board_wlan_device,bcmdhd)
