@@ -130,6 +130,7 @@ vendor/lib64/libscveObjectSegmentation.so
 vendor/lib64/libswregistrationalgo.so
 vendor/lib64/libcom.qti.chinodeutils.so
 vendor/lib64/libcamxtintlessalgo.so
+vendor/lib/libmpbase.so
 vendor/lib64/libmpbase.so
 vendor/lib64/libofflinelog.so
 vendor/lib64/libofflinedump.so
@@ -145,6 +146,7 @@ vendor/lib64/com.qti.settings.mannar.so
 vendor/lib64/com.qti.settings.sdm865.so
 vendor/lib64/com.qti.settings.sm8350.so
 vendor/lib64/com.qti.settings.kamorta.so
+vendor/lib/libtriplecam_image_optical_zoom.so
 vendor/lib64/libtriplecam_image_optical_zoom.so
 vendor/lib64/libcamxswispiqmodule.so
 vendor/lib64/libmmcamera_mfnr.so
@@ -563,8 +565,8 @@ vendor/lib/libqcmaputils.so
 vendor/lib64/libqcmaputils.so
 vendor/lib64/libengmode_client.so
 vendor/lib64/libsec-ril.so
-vendor/lib/libsecril-client.so;MODULE_SUFFIX=_vendor
-vendor/lib64/libsecril-client.so;MODULE_SUFFIX=_vendor
+vendor/lib/libsecril-client.so
+vendor/lib64/libsecril-client.so
 vendor/lib64/libril_sem.so
 vendor/etc/init/dataadpl.rc
 vendor/etc/init/ipacm-diag.rc
@@ -731,6 +733,8 @@ vendor/lib64/vendor.samsung.hardware.bluetooth.audio@2.0.so
 vendor/firmware/bcm4375B1_murata.hcd
 vendor/firmware/bcm4375B1_semco.hcd
 vendor/firmware/bcm4375B1_semco_sem.hcd
+vendor/lib64/libatccore.so
+vendor/lib/libatccore.so
 vendor/lib64/hw/camera.qcom.so
 vendor/lib64/hw/com.qti.chi.override.so
 vendor/lib64/camera/com.samsung.ois.mcu_stm32g.so
@@ -1000,7 +1004,6 @@ vendor/firmware/nvram.txt_1rh_es43_b1
 vendor/firmware/nvram.txt_CS01_semco_b1
 vendor/etc/wifi/aoa_cldb_falcon.bin
 vendor/etc/wifi/aoa_cldb_swl14.bin
-vendor/etc/wifi/wpa_supplicant.conf
 vendor/lib/libgf_in_system_lib.so
 vendor/lib64/libimgproc_sw.unifunc@common.so
 vendor/lib/libimgproc_sw.unifunc@common.so
