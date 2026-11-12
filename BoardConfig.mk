@@ -46,6 +46,10 @@ TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_KERNEL_SOURCE := kernel/samsung/o1q
 TARGET_KERNEL_CONFIG := vendor/o1q_chn_openx_defconfig
 
+# The kernel tree is NOT checked out (prebuilt kernel); the version is
+# fixed here so vendor/lineage/build/tasks/kernel.mk version checks pass
+TARGET_KERNEL_VERSION := 5.4
+
 # Kernel flags
 BOARD_KERNEL_CMDLINE += console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat printk.devkmsg=on cpuinfo.chipname=SM8350 panic=4
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
