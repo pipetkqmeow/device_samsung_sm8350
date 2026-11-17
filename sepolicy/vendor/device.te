@@ -10,5 +10,3 @@ type drb_device, dev_type;
 type fp_sensor_device, dev_type;
 type radio_qos_device, dev_type;
 
-# QBT2000 ultrasonic fingerprint
-type vendor_qbt_device, dev_type;
