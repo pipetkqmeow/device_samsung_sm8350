@@ -17,7 +17,6 @@
 /dev/ttyGS[0-9]*	u:object_r:serial_device:s0
 
 # Fingerprint (QBT2000 ultrasonic)
-/dev/qbt.*                                  u:object_r:vendor_qbt_device:s0
 /dev/esfp[0-9]                               u:object_r:fp_sensor_device:s0
 /dev/goodix_fp                               u:object_r:fp_sensor_device:s0
 
