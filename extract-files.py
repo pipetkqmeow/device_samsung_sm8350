@@ -42,6 +42,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libcrypto_shim.so'),
     ('vendor/lib/unihal_main.so', 'vendor/lib64/unihal_main.so'): blob_fixup()
         .add_needed('libui_shim.so'),
+    ('vendor/etc/init/nxp.android.hardware.nfc@1.2-service.rc', 'vendor/etc/init/vendor.samsung.hardware.wifi@2.0-service.rc'): blob_fixup()
+        .regex_replace(r'[ ]*interface vendor\.samsung\.[^\n]*\n', ''),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
